@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    cursor: none;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2; /* 一番後ろに設定 */
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒 */
+    z-index: -1; /* 画像の一つ手前 */
+}
+
+.rectangle {
+    width: 420px;
+    height: 520px;
+    background-color: #003F5F; /* さらに濃い青 */
+    animation: moveFrontBack 2s infinite;
+    z-index: 2;
+    transform-style: preserve-3d; /* 3D空間で動くように設定 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    white-space: pre-line; /* 改行を反映 */
+    line-height: 1.0; /* 行間を短く設定 */
+}
+
+@keyframes moveFrontBack {
+    0%, 100% {
+        transform: translateZ(0); /* 元の位置 */
+    }
+    50% {
+        transform: translateZ(200px); /* 手前に出る */
+    }
+}
+
+.gif-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 500px; /* GIFのサイズを調整 */
+    height: auto;
+    z-index: 3; /* 他の要素より前面に表示 */
+}
+
+.bubble {
+    position: fixed;
+    bottom: 70px; /* 画面の下部から20px */
+    right: 20px;  /* 画面の右端から20px */
+    background-color: white; /* 吹き出しの色 */
+    color: black;
+    padding: 10px 20px;
+    border-radius: 15px; /* 角を丸くする */
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 4; /* 他の要素より前面に表示 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 吹き出しに影をつける */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bubble img {
+    max-width: 30px; /* 画像の最大幅 */
+    height: auto;    /* 高さは自動で調整 */
+    margin-right: 10px; /* 画像とテキストの間に余白を追加 */
+}
+
+.bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* 吹き出しの下に三角形を配置 */
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white; /* 吹き出しの色と合わせる */
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px; /* フッターの高さ */
+    background-color: #0078D7; /* Windowsっぽい青 */
+    color: white; /* テキストの色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+footer img {
+    width: 30px; /* 画像のサイズ */
+    height: 30px; /* 画像のサイズ */
+    margin-right: 10px; /* 画像とテキストの間隔 */
+}
+
+.text-box {
+    display: inline-block;
+    padding: 1px 20px; /* 余白を少し減らす */
+    color: white; /* Windowsっぽい青 */
+    font-size: 19px; /* 文字サイズも少し小さく */
+    font-weight: bold;
+    border: 1px solid white; /* 枠線の太さも調整 */
+    border-radius: 10px; /* 角の丸みを調整 */
+    text-align: center;
+    background-color: transparent; /* 背景を透明にする */
+}
+
+.scroll-text {
+    position: fixed;
+    bottom: 3px; /* 画面下に少し余白をあける */
+    left: 40px; /* 左端から40px離して開始 */
+    width: calc(100% - 60px); /* 左端40px + 右端20px を引いた幅 */
+    font-size: 12px;
+    font-weight: bold;
+    color: white; /* 青色 */
+    text-align: left;
+    white-space: nowrap; /* テキストが改行されないようにする */
+    animation: scroll-left 20s linear infinite; /* スクロールアニメーション */
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%); /* 右端から登場 */
+    }
+    100% {
+        transform: translateX(-100%); /* 左端から消える */
+    }
+}
